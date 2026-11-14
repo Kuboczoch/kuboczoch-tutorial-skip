@@ -22,7 +22,7 @@ python build.py
 
 Windows: use `py build.py` if Python is installed through the launcher.
 
-Output: `dist/KuboczochTutorialSkip-1.0.0.zip`.
+Output: `dist/KuboczochTutorialSkip-1.0.1.zip`.
 
 Run regression tests:
 
@@ -38,6 +38,6 @@ After in-game testing:
 
 1. Use the installable ZIP from a successful `master` build. Do not upload the GitHub artifact wrapper or source archive.
 2. Create the Vintage Story Mod DB page as **Kuboczoch Tutorial Skip**, author **Kuboczoch**, client-side, game version **1.22.7**. Use the README's introduction, installation and usage sections as the description; add screenshots when available.
-3. Set the source/homepage link to `https://github.com/Kuboczoch/kuboczoch-tutorial-skip` and upload `KuboczochTutorialSkip-1.0.0.zip` as version **1.0.0**.
+3. Set the source/homepage link to `https://github.com/Kuboczoch/kuboczoch-tutorial-skip` and upload `KuboczochTutorialSkip-1.0.1.zip` as version **1.0.1**.
 
-The ZIP contains `modinfo.json` and `KuboczochTutorialSkip.dll` at its root, plus English and Polish assets. No game libraries are redistributed. The build script parses packaged JSON and checks ZIP integrity.
+The ZIP contains `modinfo.json` and `KuboczochTutorialSkip.dll` at its root, plus translated assets for every shipped game locale. No game libraries are redistributed. The build script parses packaged JSON and checks ZIP integrity; regression tests verify locale coverage.
