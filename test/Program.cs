@@ -24,6 +24,7 @@ class Program
     {
         var game = Path.GetFullPath(Environment.GetEnvironmentVariable("VINTAGE_STORY")
             ?? throw new InvalidOperationException("Set VINTAGE_STORY to the game directory."));
+        CheckLanguages(game);
         AssemblyLoadContext.Default.Resolving += (ctx, name) =>
         {
             var file = new[] { game, Path.Combine(game, "Lib"), Path.Combine(game, "Mods") }.Select(dir => Path.Combine(dir, name.Name + ".dll")).FirstOrDefault(File.Exists);
@@ -35,6 +36,26 @@ class Program
             name == "libcairo-2" ? System.Runtime.InteropServices.NativeLibrary.Load("libcairo.so.2") : IntPtr.Zero);
         Run();
     }
+    static void CheckLanguages(string game)
+    {
+        var root = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "../../../.."));
+        var folder = Path.Combine(root, "assets/kuboczochtutorialskip/lang");
+        var expected = Directory.GetFiles(Path.Combine(game, "assets/game/lang"), "*.json")
+            .Select(Path.GetFileName).Where(name => name != "languages.json").ToHashSet();
+        var files = Directory.GetFiles(folder, "*.json");
+        Check(expected.Count > 0 && expected.SetEquals(files.Select(Path.GetFileName)),
+            "translations cover every shipped game locale");
+        foreach (var file in files.Order())
+        {
+            using var json = System.Text.Json.JsonDocument.Parse(File.ReadAllText(file));
+            var entries = json.RootElement.EnumerateObject().ToArray();
+            Check(entries.Length == 1 && entries[0].Name == "skip" &&
+                entries[0].Value.ValueKind == System.Text.Json.JsonValueKind.String &&
+                !string.IsNullOrWhiteSpace(entries[0].Value.GetString()),
+                $"{Path.GetFileName(file)} has a translated skip label and no extra keys");
+        }
+    }
+
     [MethodImpl(MethodImplOptions.NoInlining)]
     static void Run()
     {

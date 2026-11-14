@@ -6,7 +6,7 @@ Adds a **Skip step** button below the current First Steps tutorial text. Each cl
 
 ## Install
 
-1. Download `KuboczochTutorialSkip-1.0.0.zip`.
+1. Download `KuboczochTutorialSkip-1.0.1.zip`.
 2. Put it in `VintagestoryData/Mods` **without extracting it**.
 3. Restart Vintage Story.
 
@@ -23,7 +23,7 @@ Client-side only. No server installation or configuration needed.
 ## Compatibility
 
 - Vintage Story **1.22.7**.
-- English and Polish button text.
+- Translated button text for all 34 language files shipped with Vintage Story 1.22.7.
 
 ## Development builds
 
