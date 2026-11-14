@@ -1,0 +1,18 @@
+{
+  "type": "code",
+  "modid": "kuboczochtutorialskip",
+  "name": "Kuboczoch Tutorial Skip",
+  "authors": [
+    "Kuboczoch"
+  ],
+  "description": "Stuck on a tutorial step? Skip it and continue the tutorial. Saves progress immediately.",
+  "website": "https://github.com/Kuboczoch/kuboczoch-tutorial-skip",
+  "version": "1.0.0",
+  "side": "Client",
+  "requiredOnClient": false,
+  "requiredOnServer": false,
+  "dependencies": {
+    "game": "1.22.7",
+    "survival": "1.22.7"
+  }
+}

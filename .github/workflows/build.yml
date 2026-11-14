@@ -1,0 +1,45 @@
+name: Build
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    env:
+      VINTAGE_STORY: ${{ runner.temp }}/vintagestory
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: actions/setup-dotnet@67a3573c9a986a3f9c594539f4ab511d57bb3ce9 # v4
+        with:
+          dotnet-version: 10.0.x
+      - name: Install test dependency
+        run: sudo apt-get update && sudo apt-get install -y --no-install-recommends libcairo2
+      - name: Download game references
+        working-directory: ${{ runner.temp }}
+        run: |
+          curl --fail --location --retry 3 --output server.tar.gz \
+            https://cdn.vintagestory.at/gamefiles/stable/vs_server_linux-x64_1.22.7.tar.gz
+          printf '%s  %s\n' a7d4a520604590a96de812ee6c6baf4404d43d86cf1ec4fbac1b3a580b52c847 server.tar.gz | sha256sum --check
+          mkdir -p "$VINTAGE_STORY"
+          tar -xzf server.tar.gz -C "$VINTAGE_STORY"
+      - name: Build mod ZIP
+        run: python3 build.py
+      - name: Test
+        run: dotnet run --project test/Test.csproj -c Release
+      - name: Upload mod ZIP
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: KuboczochTutorialSkip
+          path: dist/KuboczochTutorialSkip-*.zip
+          if-no-files-found: error
+          compression-level: 0
+          retention-days: 30

@@ -1,0 +1,9 @@
+<Project Sdk="Microsoft.NET.Sdk">
+<PropertyGroup><OutputType>Exe</OutputType><TargetFramework>net10.0</TargetFramework><ImplicitUsings>enable</ImplicitUsings><Nullable>enable</Nullable></PropertyGroup>
+<ItemGroup>
+<ProjectReference Include="../src/KuboczochTutorialSkip.csproj" />
+<Reference Include="VintagestoryAPI"><HintPath>$(VintageStoryPath)/VintagestoryAPI.dll</HintPath></Reference>
+<Reference Include="VSSurvivalMod"><HintPath>$(VintageStoryPath)/Mods/VSSurvivalMod.dll</HintPath></Reference>
+<Reference Include="0Harmony"><HintPath>$(VintageStoryPath)/Lib/0Harmony.dll</HintPath></Reference>
+<Reference Include="Newtonsoft.Json"><HintPath>$(VintageStoryPath)/Lib/Newtonsoft.Json.dll</HintPath></Reference>
+</ItemGroup></Project>

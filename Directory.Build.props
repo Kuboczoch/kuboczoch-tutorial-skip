@@ -1,0 +1,12 @@
+<Project>
+  <PropertyGroup>
+    <VintageStoryPath Condition="'$(VintageStoryPath)' == ''">$(VINTAGE_STORY)</VintageStoryPath>
+    <Deterministic>true</Deterministic>
+    <Version>1.0.0</Version>
+    <Authors>Kuboczoch</Authors>
+  </PropertyGroup>
+  <Target Name="CheckGamePath" BeforeTargets="ResolveAssemblyReferences">
+    <Error Condition="!Exists('$(VintageStoryPath)/VintagestoryAPI.dll')"
+           Text="Set VINTAGE_STORY to the Vintage Story 1.22.7 directory." />
+  </Target>
+</Project>
