@@ -4,6 +4,9 @@ Stuck on a tutorial step that will not complete? Skip that step and continue the
 
 Adds a **Skip step** button below the current First Steps tutorial text. Each click marks one step as complete and saves your progress immediately. It does not complete the whole tutorial or give you the skipped step's items.
 
+<img width="423" height="296" alt="image" src="https://github.com/user-attachments/assets/1947495e-4074-4766-b170-0c7a4e58af37" />
+
+
 ## Install
 
 1. Download `KuboczochTutorialSkip-1.0.1.zip`.
